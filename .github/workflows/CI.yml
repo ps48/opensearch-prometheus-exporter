@@ -19,6 +19,7 @@ jobs:
       options: ${{ needs.Get-CI-Image-Tag.outputs.ci-image-start-options }}
     env:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+      JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
     steps:
       - name: Run start commands
         run: ${{ needs.Get-CI-Image-Tag.outputs.ci-image-start-command }}
@@ -35,12 +36,12 @@ jobs:
       - name: Create Artifact Path
         run: |
           mkdir -p prometheus-exporter-builds
-          cp -r ./build/libs/*.jar prometheus-exporter-builds/
+          cp -r ./build/distributions/*.zip prometheus-exporter-builds/
           chown -R 1000:1000 `pwd`
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: prometheus-exporter-linux
+          name: prometheus-exporter-linux-${{ matrix.java }}
           path: prometheus-exporter-builds
 
   build-windows-macos:
@@ -63,9 +64,9 @@ jobs:
       - name: Create Artifact Path
         run: |
           mkdir -p prometheus-exporter-builds
-          cp -r ./build/libs/*.jar prometheus-exporter-builds/
+          cp -r ./build/distributions/*.zip prometheus-exporter-builds/
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: prometheus-exporter-${{ matrix.os }}
+          name: prometheus-exporter-${{ matrix.os }}-${{ matrix.java }}
           path: prometheus-exporter-builds
