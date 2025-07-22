@@ -46,7 +46,7 @@ This plugin was started as a fork of [Prometheus exporter for Elasticsearch®](h
 - Cluster settings (notably [disk watermarks](https://docs.opensearch.org/docs/latest/install-and-configure/configuring-opensearch/cluster-settings/#cluster-level-routing-and-allocation-settings) that can be updated dynamically)
 
 ## Compatibility Matrix
-NOTE: OpenSearch plugins much match _exactly_ in major.minor.path version to the OpenSearch instance it's running in, e.g. plugins versions 2.8.0.x work only with OpenSearch 2.8.0, see also [Opensearch Plugins](https://docs.opensearch.org/docs/latest/install-and-configure/plugins/). Therefore you must keep your [prometheus-exporter-plugin-for-opensearch version](https://github.com/opensearch-project/prometheus-exporter-plugin-for-opensearch/releases) in sync with your OpenSearch version.
+NOTE: OpenSearch plugins much match _exactly_ in major.minor.path version to the OpenSearch instance it's running in, e.g. plugins versions 2.8.0.x work only with OpenSearch 2.8.0, see also [Opensearch Plugins](https://docs.opensearch.org/docs/latest/install-and-configure/plugins/). Therefore you must keep your [opensearch-prometheus-exporter version](https://github.com/opensearch-project/opensearch-prometheus-exporter/releases) in sync with your OpenSearch version.
 
 | OpenSearch |      Plugin |  Release date |
 |-----------:|------------:|--------------:|
@@ -105,7 +105,7 @@ You need to install the plugin on every OpenSearch node that will be scraped by 
 
 To **install** the plugin:
 
-`./bin/opensearch-plugin install https://github.com/aiven/prometheus-exporter-plugin-for-opensearch/releases/download/2.17.1.0/prometheus-exporter-2.17.1.0.zip`
+`./bin/opensearch-plugin install https://github.com/opensearch-project/opensearch-prometheus-exporter/releases/download/2.17.1.0/prometheus-exporter-2.17.1.0.zip`
 
 To **remove** the plugin.
 

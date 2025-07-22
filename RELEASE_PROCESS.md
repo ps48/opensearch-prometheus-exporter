@@ -62,7 +62,7 @@ Notice that the commit must be `signed` (it is requirement of our [Contribution 
 
 When opening the PR pay attention to target branch. If you prepare release for older version of the plugin the chance is that it will not go against the `main` branch but against different branch (such as `v1.3` or similar).
 
-- Example of commit: https://github.com/aiven/prometheus-exporter-plugin-for-opensearch/pull/63
+- Example of commit: https://github.com/opensearch-project/opensearch-prometheus-exporter/pull/63
 
 If this commit passes CI tests and is merged then **the repo admin will create a new release tag** for it and push that tag into repo (`upstream` is the repo under the Aiven GitHub org).
 
@@ -91,7 +91,7 @@ When doing releases of older versions of the plugin it can happen that the Compa
 
 Prepare new Release Draft based on the new release tag.
 
-- Tip: Get some inspiration from our [past releases](https://github.com/aiven/prometheus-exporter-plugin-for-opensearch/releases).
+- Tip: Get some inspiration from our [past releases](https://github.com/opensearch-project/opensearch-prometheus-exporter/releases).
 
 ### 6. Build release artifacts and upload them
 
