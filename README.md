@@ -311,3 +311,7 @@ limitations under the License.
 ## Trademarks & Attributions
 
 Prometheus is a registered trademark of The Linux Foundation. OpenSearch is a registered trademark of Amazon Web Services. Elasticsearch is a registered trademark of Elasticsearch BV.
+
+We gratefully thank all the contributors from the [Aiven organization](https://github.com/Aiven-Open) for their work on this project prior to its migration to the OpenSearch organization.
+
+
