@@ -26,13 +26,13 @@ If the release includes upgrade to a new version of OpenSearch it is recommended
 
 This is only to make sure that if the upgrade will need to be reverted then we will not have to delete any git tags or otherwise manipulate public git repo history.
 
-- PR example: https://github.com/aiven/prometheus-exporter-plugin-for-opensearch/pull/62
+- PR example: https://github.com/opensearch-project/opensearch-prometheus-exporter/pull/62
 
 ### 2. Open a new ticket with release checklist
 
 It is helpful to track individual release steps. A good practice is opening a new ticket with the checklist and update it during the process to make sure nothing is forgotten and that steps are happening in correct order.
 
-- Ticket example: https://github.com/aiven/prometheus-exporter-plugin-for-opensearch/issues/61
+- Ticket example: https://github.com/opensearch-project/opensearch-prometheus-exporter/issues/61
 
 ### 3. Create and push the release commit
 
