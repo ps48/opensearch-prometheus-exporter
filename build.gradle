@@ -145,12 +145,6 @@ testClusters.all {
     // It seems cluster name can not be customized here. It gives an error:
     // Testclusters does not allow the following settings to be changed:[cluster.name] for node{::yamlRestTest-0}
     // setting 'cluster.name', 'PrometheusExporterITCluster'
-    
-    // The testClusters plugin supports unpacking the OpenSearch distribution instead of hard-linking binaries. 
-    // This avoids the below error:
-    // --- Failed to create working dir using hard links. Falling back to copy
-    // --- org.opensearch.gradle.testclusters.OpenSearchNode$LinkCreationException: Failed to create hard link 
-    distributionType = 'archive'
 }
 
 integTest {
