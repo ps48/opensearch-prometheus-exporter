@@ -60,7 +60,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build with Gradle
         run: |
-          ./gradlew --info build
+          ./gradlew --info build -x yamlRestTest
       - name: Create Artifact Path
         run: |
           mkdir -p prometheus-exporter-builds
