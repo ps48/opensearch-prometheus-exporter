@@ -19,6 +19,7 @@ jobs:
       options: ${{ needs.Get-CI-Image-Tag.outputs.ci-image-start-options }}
     env:
       ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+      JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8
     steps:
       - name: Run start commands
         run: ${{ needs.Get-CI-Image-Tag.outputs.ci-image-start-command }}
