@@ -1,32 +1,71 @@
-name: Build and Test Plugin Template
+name: Build and Test Prometheus Exporter
 
-on:
-  push:
-    branches:
-      - "*"
-  pull_request:
-    branches:
-      - "*"
+on: [push, pull_request]
 
 jobs:
-  build:
+  Get-CI-Image-Tag:
+    uses: opensearch-project/opensearch-build/.github/workflows/get-ci-image-tag.yml@main
+    with:
+      product: opensearch
+
+  linux-build:
+    needs: Get-CI-Image-Tag
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        java: [17,21]
-    name: Build and Test Plugin Template
-    runs-on: ${{ matrix.os }}
-    permissions:
-      contents: read
-
+        java: [17, 21]
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ needs.Get-CI-Image-Tag.outputs.ci-image-version-linux }}
+      options: ${{ needs.Get-CI-Image-Tag.outputs.ci-image-start-options }}
+    env:
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK ${{ matrix.java }}
-      uses: actions/setup-java@v4
-      with:
-        distribution: "temurin"
-        java-version: ${{ matrix.java }}
+      - name: Run start commands
+        run: ${{ needs.Get-CI-Image-Tag.outputs.ci-image-start-command }}
+      - uses: actions/checkout@v4
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: ${{ matrix.java }}
+      - name: Build with Gradle
+        run: |
+          chown -R 1000:1000 `pwd`
+          su `id -un 1000` -c "./gradlew --info build"
+      - name: Create Artifact Path
+        run: |
+          mkdir -p prometheus-exporter-builds
+          cp -r ./build/libs/*.jar prometheus-exporter-builds/
+          chown -R 1000:1000 `pwd`
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: prometheus-exporter-linux
+          path: prometheus-exporter-builds
 
-    - name: Build and Run Tests
-      run: |
+  build-windows-macos:
+    strategy:
+      fail-fast: false
+      matrix:
+        java: [17, 21]
+        os: [windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: ${{ matrix.java }}
+      - uses: actions/checkout@v4
+      - name: Build with Gradle
+        run: |
           ./gradlew --info build
+      - name: Create Artifact Path
+        run: |
+          mkdir -p prometheus-exporter-builds
+          cp -r ./build/libs/*.jar prometheus-exporter-builds/
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: prometheus-exporter-${{ matrix.os }}
+          path: prometheus-exporter-builds
