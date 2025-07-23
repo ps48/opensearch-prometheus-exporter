@@ -36,8 +36,8 @@ jobs:
       - name: Upload coverage
         uses: codecov/codecov-action@v4
         with:
-          flags: opensearch-observability
-          directory: opensearch-observability/
+          flags: opensearch-prometheus-exporter
+          directory: opensearch-prometheus-exporter/
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Create Artifact Path
         run: |
